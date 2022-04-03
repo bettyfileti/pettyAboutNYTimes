@@ -2,6 +2,7 @@
 //Server
 let express = require('express');
 let app = express();
+let port = process.env.PORT || 3000;
 
 // app.get('/', (request, response) => {
 //     response.send("This is a page.")
@@ -13,8 +14,8 @@ app.get('/about', (request, response) => {
     response.send("This is an about page.");
 });
 
-app.listen(3000, () => {
-    console.log("The app is listening at localhost: 3000");
+app.listen(port, () => {
+    console.log("The app is listening at", port);
 })
 
 //--------------------------------------------------------------
