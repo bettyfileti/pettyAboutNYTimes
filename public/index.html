@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bEsTsElLeR</title>
 
-    <link rel="shortcut icon" type="image/png" href="assets/favicon-01.png"/>
+    <link rel="shortcut icon" type="image/png" href="assets/favicon-01.png" />
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://use.typekit.net/vju8cvb.css">
 </head>
@@ -15,52 +15,104 @@
 <body>
     <div class="container">
         <div class="center-container">
-            <div class = "books-title">
-                <h1>Petty About Books</h1>
+            <div class="books-title">
+                <h1 id = "subtext">I'm not petty about books</h1>
             </div>
-            
-            <div class = "intro-text">
-                <h2>Oh, wow, look who made the bestseller list.</h2>
+
+            <div class="intro-text">
+                <h2 id = "running-commentary">Oh, wow, look who made the bestseller list.</h2>
             </div>
-            
-            <div class = "book-info">
-                <div class = "author-title">
-                    <h3 id = "bestseller-book-title">Book Title</h3>
-                    <p class="body-small" id = "bestseller-author-name">
-                        Author Name
+
+            <div class="bookshelf">
+                <div class="column-5th" id="combined-print-and-e-book-fiction">
+                    <img src="assets/combined-print-and-e-book-fiction.jpg" width="80">
+                    <div class="author-title">
+                        <h3 class="book-title" id="print-and-e-book-fiction-title">Book Title</h3>
+                        <p class="body-small" id="print-and-e-book-fiction-author">
+                            Author Name
+                        </p>
+                    </div>
+                </div>
+                <div class="column-5th" id="combined-print-and-e-book-nonfiction">
+                    <img src="assets/combined-print-and-e-book-nonfiction.jpg" width="80">
+                    <div class="author-title">
+                        <h3 class="book-title" id="print-and-e-book-nonfiction-title">Book Title</h3>
+                        <p class="body-small" id="print-and-e-book-nonfiction-author">
+                            Author Name
+                        </p>
+                    </div>
+                </div>
+                <div class="column-5th" id="hardcover-fiction">
+                    <img src="assets/hardcover-fiction.jpg" width="80">
+                    <div class="author-title">
+                        <h3 class="book-title" id="hardcover-fiction-title">Book Title</h3>
+                        <p class="body-small" id="hardcover-fiction-author">
+                            Author Name
+                        </p>
+                    </div>
+                </div>
+                <div class="column-5th" id="hardcover-nonfiction">
+                    <img src="assets/hardcover-nonfiction.jpg" width="80">
+                    <div class="author-title">
+                        <h3 class="book-title" id="hardcover-nonfiction-title">Book Title</h3>
+                        <p class="body-small" id="hardcover-nonfiction-author">
+                            Author Name
+                        </p>
+                    </div>
+                </div>
+                <div class="column-5th" id="trade-fiction-paperback">
+                    <img src="assets/trade-fiction-paperback.jpg" width="80">
+                    <div class="author-title">
+                        <h3 class="book-title" id="trade-fiction-paperback-title">Book Title</h3>
+                        <p class="body-small" id="trade-fiction-paperback-author">
+                            Author Name
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Starts with display none -->
+            <div class="messingWithTheCover" id="displayCover">
+                <div class="book-info">
+                    <div class="author-title">
+                        <h3 id="bestseller-book-title">Book Title</h3>
+                        <p class="body-small" id="bestseller-author-name">
+                            Author Name
+                        </p>
+                    </div>
+
+                    <p class="body-info" id="bestseller-list-name">
+                        List Name
                     </p>
                 </div>
-                
-                <p class="body-info" id="bestseller-list-name">
-                    List Name
-                </p>
-            </div>
-            
-            <div class = "feelings-container">
-                <p class="body-large" id = "feelings">
-                    It sure would be a shame if someone <span class = "red-text">scribbled </span> all over your beautiful cover...
-                </p>
-            </div>
 
-            <div class="bookCover-canvas" id = "data_container">
-                
-            </div>
+                <div class="feelings-container">
+                    <p class="body-large" id="feelings">
+                        It sure would be a shame if someone <span class="red-text">scribbled </span> all over your
+                        beautiful cover...
+                    </p>
+                </div>
 
-            <div class = "button-container">
-                <button id = "flow-button">Oh nooo, I made a mess.</button>
+                <div class="bookCover-canvas" id="data_container">
+
+                </div>
+
+                <div class="button-container">
+                    <button id="flow-button">Oh nooo, I made a mess.</button>
+                </div>
+
             </div>
 
-
-            
         </div>
     </div>
 
+
+    <script src="libraries/p5.js"></script>
     <script src="scripts/stickers.js"></script>
     <script src="scripts/imageSlices.js"></script>
     <script src="scripts/bookCovers.js"></script>
+    <script src="scripts/bookShelf.js"></script>
 
-    <script src="libraries/p5.js"></script>
-    
 </body>
 
-</html> 
+</html>

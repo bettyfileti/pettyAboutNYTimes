@@ -71,36 +71,32 @@ let imageJSON;
 let allImages = []
 
 function preload() {
-    let jsonURL = "/bookCovers"
-    imageJSON = loadJSON(jsonURL, populateImages); //load images as promise after this loaddddss
-    //img = loadImage("assets/combined-print-and-e-book-fiction.jpg");
     sticker1 = loadImage("assets/stickers-01.png");
     sticker2 = loadImage("assets/stickers-02.png");
     sticker3 = loadImage("assets/stickers-03.png");
-
 }
 
-function populateImages() {
-    console.log(imageJSON);
-    for (let key in imageJSON) {
-        let coverImage = loadImage(imageJSON[key].new_book_image);
-        allImages.push(coverImage);
+// function populateImages() {
+//     console.log(imageJSON);
+//     for (let key in imageJSON) {
+//         let coverImage = loadImage(imageJSON[key].new_book_image);
+//         allImages.push(coverImage);
 
-        if (imageJSON[key].order == 0) {
-            let displayAuthor = document.getElementById("bestseller-author-name");
-            displayAuthor.innerHTML = imageJSON[key].author;
+//         if (imageJSON[key].order == 0) {
+//             let displayAuthor = document.getElementById("bestseller-author-name");
+//             displayAuthor.innerHTML = imageJSON[key].author;
 
-            let displayBookTitle = document.getElementById("bestseller-book-title");
-            displayBookTitle.innerHTML = imageJSON[key].title;
+//             let displayBookTitle = document.getElementById("bestseller-book-title");
+//             displayBookTitle.innerHTML = imageJSON[key].title;
 
-            let displayListName = document.getElementById("bestseller-list-name");
-            displayListName.innerHTML = imageJSON[key].list_name;
-        }
-    }
+//             let displayListName = document.getElementById("bestseller-list-name");
+//             displayListName.innerHTML = imageJSON[key].list_name;
+//         }
+//     }
 
-    console.log()
-    img = allImages[0];
-}
+//     console.log()
+//     img = allImages[0];
+// }
 
 function setup() {
     pixelDensity(2.5);
@@ -116,7 +112,6 @@ function setup() {
     imgY = (400 - img.height) / 2;
 
     image(img, imgX, imgY);
-
 
     stickers.push(new Sticker(sticker1, 0, imgX - (sticker1.width * .3), imgY + 100 * 0));
     stickers.push(new Sticker(sticker2, 1, imgX - (sticker2.width * .3), imgY + 100 * 1));

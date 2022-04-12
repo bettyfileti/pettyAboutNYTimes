@@ -82,13 +82,16 @@ function fetchLists() {
                     author: data.results.books[0].author,
                     book_image: data.results.books[0].book_image,
                     new_book_image: "./assets/" + data.results.list_name_encoded + ".jpg",
-                    //new_book_image: image_path, 
                     book_image_width: data.results.books[0].book_image_width,
                     book_image_height: data.results.books[0].book_image_height,
                     weeks_on_list: data.results.books[0].weeks_on_list
                 })
 
                 app.get('/bookCovers', (request, response) => {
+                    response.json(dataToPush);
+                })
+
+                app.get('/bookShelf', (request, response) => {
                     response.json(dataToPush);
                 })
 

@@ -101,6 +101,37 @@ button:disabled{
     border-bottom-color: #C4C4C4;
 }
 
+.bookshelf{
+    display: flex;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #000000;
+}
+
+.column-5th{
+    flex-direction: column;
+    flex: 1 0 10%;
+    padding: 16px 16px 0 16px;
+    border-right: 0.0625rem solid #e2e2e2;
+}
+
+.column-5th:hover{
+    background-color: aquamarine;
+}
+
+.column-5th:nth-child(5){
+    border-right: 0;
+}
+
+.column-5th .book-title{
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.column-5th .body-small{
+    font-size: 10px;
+}
+
 .intro-text{
     display: flex;
     align-items: center;
@@ -108,6 +139,10 @@ button:disabled{
     border-bottom-width: 2px;
     border-bottom-color: #000000;
     padding-bottom: 4px;
+}
+
+.messingWithTheCover{
+    display: none;
 }
 
 .book-info{
