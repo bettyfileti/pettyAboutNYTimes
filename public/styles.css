@@ -132,6 +132,7 @@ button:disabled{
     font-size: 10px;
 }
 
+
 .intro-text{
     display: flex;
     align-items: center;
@@ -155,7 +156,8 @@ button:disabled{
 }
 
 .author-title{
-    display: flex;
+    display: none;
+    /* display: flex; */
     flex-direction: column;
     padding: 14px 0px 16px 0px;
 }

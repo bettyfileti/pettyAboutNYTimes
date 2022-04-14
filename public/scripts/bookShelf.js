@@ -62,6 +62,7 @@ function takeBookOffShelf(book) {
     let bookAuthor = bookInfo.children[1].innerHTML;
 
     document.getElementById("displayCover").style.display = "block";
+    document.getElementById("active-book-info").style.display = "flex";
 
     let displayAuthor = document.getElementById("bestseller-author-name");
     displayAuthor.innerHTML = bookAuthor;
