@@ -38,7 +38,7 @@ function buildBookShelf() {
 
         //create bookCovers as classes
         loadImage(imageJSON2[key].new_book_image, function (loadedImage) {
-            bookCovers.push(new CoverClass(loadedImage, imageJSON2[key].list_name_encoded, false));
+            bookCovers.push(new CoverClass(loadedImage, imageJSON2[key].list_name_encoded, imageJSON2[key].list_name, false));
         });
 
         //Set up bookshelf display
@@ -83,6 +83,9 @@ function takeBookOffShelf(book) {
             bookCover.active = true;
             bookCover.imageSetup = true;
             console.log("clicked: ", bookCover.listname);
+            
+            let displayListName = document.getElementById("bestseller-list-name");
+            displayListName.innerHTML = bookCover.listnameDisplay;
         }
     }
     //Change book info to reflect active book
@@ -99,7 +102,7 @@ function takeBookOffShelf(book) {
     let displayBookTitle = document.getElementById("bestseller-book-title");
     displayBookTitle.innerHTML = bookTitle;
 
-    let displayListName = document.getElementById("bestseller-list-name");
+
 }
 
 //--------------------------------------------------------------

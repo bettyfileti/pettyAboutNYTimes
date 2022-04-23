@@ -1,11 +1,12 @@
 class CoverClass {
-    constructor(img, listname, active) {
+    constructor(img, listname, listnameDisplay, active) {
         this.img = img,
             this.width = this.img.width * .5,
             this.height = this.img.height * .5,
             this.x = (800 - this.width) / 2,
             this.y = (275 - this.height) / 2,
             this.listname = listname,
+            this.listnameDisplay = listnameDisplay,
             this.active = false,
             this.imageSetup = true,
             this.flowTracker = 0,
