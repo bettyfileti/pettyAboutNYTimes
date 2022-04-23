@@ -2,6 +2,7 @@
 // BOOKSHELF
 //--------------------------------------------------------------
 let activeBook = false;
+let currentFlow;
 let myNewBook;
 
 let printEbookFictionTitleDisplay = document.getElementById("print-and-e-book-fiction-title");
@@ -106,23 +107,16 @@ function takeBookOffShelf(book) {
 //--------------------------------------------------------------
 
 let newCanvas = true;
+let stickerImg;
 
 function preload() {
     let jsonURL = "/bookCovers"
     console.log("preloading...", jsonURL);
     imageJSON2 = loadJSON(jsonURL, buildBookShelf); //load images as promise after this loaddddss
 
-    let sticker1 = loadImage("assets/stickers-01.png");
-    let sticker2 = loadImage("assets/stickers-02.png");
-    let sticker3 = loadImage("assets/stickers-03.png");
-
-    stickers.push(new Sticker(sticker1, 0, 0, 100 * 0));
-    stickers.push(new Sticker(sticker2, 1, 0, 100 * 1));
-    stickers.push(new Sticker(sticker3, 2, 0, 100 * 2));
-
-    // stickers.push(new Sticker(sticker1, 0, imgX - (sticker1.width * .3), imgY + 100 * 0));
-    // stickers.push(new Sticker(sticker2, 1, imgX - (sticker2.width * .3), imgY + 100 * 1));
-    // stickers.push(new Sticker(sticker3, 2, imgX - (sticker3.width * .3), imgY + 100 * 2));
+    stickerImg = loadImage("assets/goldstar.png");
+    stickers.push(new Sticker(stickerImg));
+    
 }
 
 function setup() {

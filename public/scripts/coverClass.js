@@ -14,7 +14,6 @@ class CoverClass {
 
     draw() {
         if (this.active) {
-            //for stickers, captureStartImage();
             if (this.imageSetup) {
                 background(backgroundColor);
                 image(this.editedImg, this.x, this.y, this.width, this.height);
@@ -23,21 +22,26 @@ class CoverClass {
             }
 
             let runningFunction = flows[this.flowTracker];
-            runningFunction();
+            currentFlow = flows[this.flowTracker].name;
+            runningFunction(this.editedImg, this.x, this.y, this.width, this.height);
         }
     }
 
 
     buttonClicked() {
         console.log("button was clicked for", this.listname);
-        //grab canvas
-        //updated this.editedImg to be that canvas
+
+        //updated this.editedImg to be current canvas
         this.editedImg = get(this.x, this.y, this.width, this.height);
 
         //update bookshelf image
         let newImage = this.editedImg.canvas;
         let imageToUpdate = document.getElementById(this.listname).getElementsByTagName("img")[0];
         imageToUpdate.src = newImage.toDataURL();
+
+        //update text
+        flowButton.innerHTML = buttonsText[this.flowTracker];
+        feelingsDisplay.innerHTML = feelingsText[this.flowTracker];
 
         //start next flow
         this.flowTracker = this.flowTracker + 1;
@@ -54,6 +58,7 @@ class CoverClass {
 let flows = [scribbleOnImage, eraseImage, addStickers, smearImage];
 let flowCount = 0;
 let timeToFinishTheCover = false;
+
 let flowButton = document.getElementById("flow-button");
 let feelingsDisplay = document.getElementById("feelings");
 
@@ -65,13 +70,30 @@ flowButton.addEventListener("click", function () {
     }
 })
 
+let feelingsText = [
+    "Clumsy me! Here, let’s try to erase some of that mess.",
+    "It looks worse than it is. We can cover it with a sticker or two.",
+    //"If you don’t care for the stickers, we can just cut them out.",
+    "Calm down. We can just smudge over that.",
+    "I actually like it better than the original."
+
+]
+
+let buttonsText = [
+    "Oh dear, erased a bit too much there.",
+    "Better than the original! Don't you think?",
+    "I actually really like it.",
+    "This looks so good.",
+    "Huh, is that the best-seller?"
+]
+
 //--------------------------------------------------------------
-function scribbleOnImage() {
+function scribbleOnImage(img, x, y, width, height) {
     if (mouseIsPressed) {
         flowButton.style.display = "flex";
         push();
         stroke("red");
-        strokeWeight(2);
+        strokeWeight(3);
         line(mouseX, mouseY, pmouseX, pmouseY);
         pop();
     }
@@ -79,7 +101,7 @@ function scribbleOnImage() {
 
 //--------------------------------------------------------------
 //Erase Image Function
-function eraseImage() {
+function eraseImage(img, x, y, width, height) {
 
     if (mouseIsPressed) {
         flowButton.style.display = "flex";
@@ -92,18 +114,11 @@ function eraseImage() {
 }
 
 //--------------------------------------------------------------
-function addStickers() {
+function addStickers(img, x, y, width, height) {
+    background(backgroundColor);
+    image(img, x, y, width, height);
+
     for (let sticker of stickers) {
-        sticker.over();
-        sticker.update();
-        if (sticker.new) {
-            if (sticker.dragging) {
-                stickers.push(
-                    new Sticker(sticker.img, stickers.length, sticker.x, sticker.y)
-                );
-                sticker.new = false;
-            }
-        }
         sticker.show();
     }
 }
@@ -115,7 +130,7 @@ let imageCutOut;
 let rectCutOut;
 let imageIsBeingMoved = false;
 
-function cutImage() {
+function cutImage(img, x, y, width, height) {
     if (!imageIsBeingMoved) {
         if (activeCutOut.length === 4) {
             let x = activeCutOut[0];
@@ -147,16 +162,16 @@ function cutImage() {
 
 
 //--------------------------------------------------------------
-function pasteCopies() {
+function pasteCopies(img, x, y, width, height) {
     console.log("pasting copies");
 }
 
 //--------------------------------------------------------------
 let focusSize = 10;
-function smearImage() {
+function smearImage(img, x, y, width, height) {
 
     fill("white");
-    rect(imgX - 100, imgY, 200, img.height * 2); //This is not a permanent solution!
+    rect(this.x - 100, this.y, 200, this.height * 2); //This is not a permanent solution!
     noFill();
     if (mouseIsPressed) {
         let pixelArray = get(mouseX, mouseY, focusSize, focusSize);
@@ -170,16 +185,10 @@ function smearImage() {
 
 }
 
-//--------------------------------------------------------------
-function captureStartImage() {
-    startImage = get();
-    //flowStart = false;
-    //flowButton.style.display = "flex";
-}
 
 //--------------------------------------------------------------
 let captureFinalImage = true;
-function finishTheCover() {
+function finishTheCover(img, x, y, width, height) {
     flowButton.style.display = "none";
     feelingsDisplay.innerHTML = "It wasn't that good in the first place."
 
@@ -202,7 +211,10 @@ function finishTheCover() {
 
 //--------------------------------------------------------------
 function mouseDragged() {
-    let currentFlow = flows[flowCount].name;
+    if (currentFlow === "addStickers"){
+        stickers[stickers.length-1].placeSticker();
+        stickers.push(new Sticker(stickerImg));
+    }
 
     if (currentFlow === "cutImage") {
         if (!imageIsBeingMoved) {
@@ -221,14 +233,18 @@ function mouseDragged() {
     }
 }
 
+function mouseClicked(){
+    if (currentFlow === "addStickers"){
+        stickers[stickers.length-1].placeSticker();
+        stickers.push(new Sticker(stickerImg));
+    }
+}
+
 function mousePressed() {
-    let currentFlow = flows[flowCount].name;
 
     if (currentFlow === "addStickers") {
         flowButton.style.display = "flex";
-        for (let sticker of stickers) {
-            sticker.pressed();
-        }
+        stickers[stickers.length-1].placeSticker();
     }
 
     //------
@@ -244,8 +260,6 @@ function mousePressed() {
 }
 
 function mouseReleased() {
-    let currentFlow = flows[flowCount].name;
-
     if ((flows[flowCount].name === "addStickers")) {
         for (let sticker of stickers) {
             sticker.released();
