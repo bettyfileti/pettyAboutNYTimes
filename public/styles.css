@@ -57,11 +57,38 @@ button:disabled{
     background-color: lightgray;
 }
 
+select{
+    padding: 8px 10px 10px; 
+    margin: 10px 0 8px 0;
+
+    background: #567C94;
+    border-radius: 3px;
+    border-style: none;
+
+    font-family: franklin-gothic-atf, sans-serif;;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: left;
+    color: #FFFFFF;
+
+}
+
 /* //-------------------------------------------------------------- */
 /* Classes */
 .container{
     display: flex;
     justify-content: center;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #000000;
+    padding-bottom: 4px;
 }
 
 .center-container{
@@ -136,10 +163,6 @@ button:disabled{
 .intro-text{
     display: flex;
     align-items: center;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: #000000;
-    padding-bottom: 4px;
 }
 
 .messingWithTheCover{
@@ -156,7 +179,7 @@ button:disabled{
 }
 
 .author-title{
-    display: none;
+    display: flex;
     flex-direction: column;
     padding: 14px 0px 16px 0px;
 }
@@ -180,4 +203,8 @@ button:disabled{
 .myCanvas{
     border-style: dashed;
     border-color: lightgreen;
+}
+
+.hover-overlay{
+    display: none;
 }

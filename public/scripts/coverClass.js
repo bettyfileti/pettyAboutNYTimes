@@ -1,16 +1,21 @@
 class CoverClass {
-    constructor(img, listname, listnameDisplay, active) {
+    constructor(img, title, author, listname, listnameDisplay, rank) {
         this.img = img,
+            this.title = title,
+            this.author = author,
             this.width = this.img.width * .5,
             this.height = this.img.height * .5,
             this.x = (800 - this.width) / 2,
             this.y = (275 - this.height) / 2,
             this.listname = listname,
             this.listnameDisplay = listnameDisplay,
+            this.rank = rank,
             this.active = false,
+            this.activeList = false,
             this.imageSetup = true,
             this.flowTracker = 0,
-            this.editedImg = img
+            this.editedImg = img,
+            this.hasBeenEdited = false
     }
 
     draw() {
@@ -19,6 +24,7 @@ class CoverClass {
                 background(backgroundColor);
                 image(this.editedImg, this.x, this.y, this.width, this.height);
                 flowButton.style.display = "none";
+                this.hasBeenEdited = true;
                 this.imageSetup = false;
             }
 
@@ -28,16 +34,26 @@ class CoverClass {
         }
     }
 
+    update() {
+        if (this.listname != selectedList.value){
+            this.activeList = false;
+        } else if (this.listname == selectedList.value){
+            this.activeList = true;
+        }
+    }
+
 
     buttonClicked() {
-        console.log("button was clicked for", this.listname);
+        console.log("button was clicked for", this.rank);
 
         //updated this.editedImg to be current canvas
         this.editedImg = get(this.x, this.y, this.width, this.height);
 
         //update bookshelf image
         let newImage = this.editedImg.canvas;
-        let imageToUpdate = document.getElementById(this.listname).getElementsByTagName("img")[0];
+        let idToUpdate = "image-" + this.rank;
+        console.log(idToUpdate);
+        let imageToUpdate = document.getElementById(idToUpdate);
         imageToUpdate.src = newImage.toDataURL();
 
         //update text
@@ -212,8 +228,8 @@ function finishTheCover(img, x, y, width, height) {
 
 //--------------------------------------------------------------
 function mouseDragged() {
-    if (currentFlow === "addStickers"){
-        stickers[stickers.length-1].placeSticker();
+    if (currentFlow === "addStickers") {
+        stickers[stickers.length - 1].placeSticker();
         stickers.push(new Sticker(stickerImg));
     }
 
@@ -234,9 +250,9 @@ function mouseDragged() {
     }
 }
 
-function mouseClicked(){
-    if (currentFlow === "addStickers"){
-        stickers[stickers.length-1].placeSticker();
+function mouseClicked() {
+    if (currentFlow === "addStickers") {
+        stickers[stickers.length - 1].placeSticker();
         stickers.push(new Sticker(stickerImg));
     }
 }
@@ -245,7 +261,7 @@ function mousePressed() {
 
     if (currentFlow === "addStickers") {
         flowButton.style.display = "flex";
-        stickers[stickers.length-1].placeSticker();
+        stickers[stickers.length - 1].placeSticker();
     }
 
     //------

@@ -4,10 +4,6 @@ let express = require('express');
 let app = express();
 let port = process.env.PORT || 3000;
 
-// app.get('/', (request, response) => {
-//     response.send("This is a page.")
-// });
-
 app.use('/', express.static('public'));
 
 app.get('/about', (request, response) => {
@@ -68,24 +64,28 @@ function fetchLists() {
                 return response.json();
             })
             .then(data => {
-                let indexValue = 0;
-                let newImage;
-                let image_path = './public/assets/' + data.results.list_name_encoded + '.jpg';
-                newImage = saveImageToDisk(data.results.books[0].book_image, image_path);
+                let booksPerList = 5;
+                for (let i = 0; i < booksPerList; i++){
+                    let newImage;
+                    let image_path = './public/assets/' + data.results.list_name_encoded + '/' + data.results.books[i].rank + '.jpg';
+                    console.log(image_path);
+                    newImage = saveImageToDisk(data.results.books[i].book_image, image_path);
+    
+                    dataToPush.push({
+                        order: dataToPush.length,
+                        list_name: data.results.list_name,
+                        list_name_encoded: data.results.list_name_encoded,
+                        title: data.results.books[i].title,
+                        author: data.results.books[i].author,
+                        book_image: data.results.books[i].book_image,
+                        new_book_image: './assets/' + data.results.list_name_encoded + '/' + data.results.books[i].rank + '.jpg',
+                        book_image_width: data.results.books[i].book_image_width,
+                        book_image_height: data.results.books[i].book_image_height,
+                        weeks_on_list: data.results.books[i].weeks_on_list,
+                        rank: data.results.books[i].rank
+                    })
+                }
 
-
-                dataToPush.push({
-                    order: dataToPush.length,
-                    list_name: data.results.list_name,
-                    list_name_encoded: data.results.list_name_encoded,
-                    title: data.results.books[0].title,
-                    author: data.results.books[0].author,
-                    book_image: data.results.books[0].book_image,
-                    new_book_image: "./assets/" + data.results.list_name_encoded + ".jpg",
-                    book_image_width: data.results.books[0].book_image_width,
-                    book_image_height: data.results.books[0].book_image_height,
-                    weeks_on_list: data.results.books[0].weeks_on_list
-                })
 
                 app.get('/bookCovers', (request, response) => {
                     response.json(dataToPush);

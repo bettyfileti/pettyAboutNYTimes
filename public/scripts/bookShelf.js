@@ -5,16 +5,29 @@ let activeBook = false;
 let currentFlow;
 let myNewBook;
 
-let printEbookFictionTitleDisplay = document.getElementById("print-and-e-book-fiction-title");
-let printEbookFictionAuthorDisplay = document.getElementById("print-and-e-book-fiction-author");
-let printEbookNonfictionTitleDisplay = document.getElementById("print-and-e-book-nonfiction-title");
-let printEbookNonfictionAuthorDisplay = document.getElementById("print-and-e-book-nonfiction-author");
-let hardcoverFictionTitleDisplay = document.getElementById("hardcover-fiction-title");
-let hardcoverFictionAuthorDisplay = document.getElementById("hardcover-fiction-author");
-let hardcoverNonfictionTitleDisplay = document.getElementById("hardcover-nonfiction-title");
-let hardcoverNonfictionAuthorDisplay = document.getElementById("hardcover-nonfiction-author");
-let tradeFictionPaperbackTitleDisplay = document.getElementById("trade-fiction-paperback-title");
-let tradeFictionPaperbackAuthorDisplay = document.getElementById("trade-fiction-paperback-author");
+let selectedList = document.getElementById("select-list");
+selectedList.addEventListener("change", updateList);
+
+function updateList() {
+    puttingBooksOnShelf();
+}
+
+let title1Display = document.getElementById("title-1");
+let author1Display = document.getElementById("author-1");
+let image1Display = document.getElementById("image-1");
+let title2Display = document.getElementById("title-2");
+let author2Display = document.getElementById("author-2");
+let image2Display = document.getElementById("image-2");
+let title3Display = document.getElementById("title-3");
+let author3Display = document.getElementById("author-3");
+let image3Display = document.getElementById("image-3");
+let title4Display = document.getElementById("title-4");
+let author4Display = document.getElementById("author-4");
+let image4Display = document.getElementById("image-4");
+let title5Display = document.getElementById("title-5");
+let author5Display = document.getElementById("author-5");
+let image5Display = document.getElementById("image-5");
+
 
 console.log("bookShelf is loading");
 
@@ -30,36 +43,21 @@ let bookCovers = [];
 // Setting up Bookshelf
 //--------------------------------------------------------------
 
+
 function buildBookShelf() {
     console.log("building a shelf", imageJSON2);
 
+    //Making bookCovers[]
     Object.keys(imageJSON2).forEach(function (key) {
         let jsonListName = imageJSON2[key].list_name_encoded;
 
         //create bookCovers as classes
         loadImage(imageJSON2[key].new_book_image, function (loadedImage) {
-            bookCovers.push(new CoverClass(loadedImage, imageJSON2[key].list_name_encoded, imageJSON2[key].list_name, false));
+            bookCovers.push(new CoverClass(loadedImage, imageJSON2[key].title, imageJSON2[key].author, imageJSON2[key].list_name_encoded, imageJSON2[key].list_name, imageJSON2[key].rank));
+            if (bookCovers.length >= 25) { //kind of a clunky way to avoid redundancy but effective.
+                puttingBooksOnShelf();
+            }
         });
-
-        //Set up bookshelf display
-        if (jsonListName == "trade-fiction-paperback") {
-            tradeFictionPaperbackTitleDisplay.innerHTML = imageJSON2[key].title;
-            tradeFictionPaperbackAuthorDisplay.innerHTML = imageJSON2[key].author;
-        } else if (jsonListName == "combined-print-and-e-book-fiction") {
-            printEbookFictionTitleDisplay.innerHTML = imageJSON2[key].title;
-            printEbookFictionAuthorDisplay.innerHTML = imageJSON2[key].author;
-        } else if (jsonListName == "hardcover-fiction") {
-            hardcoverFictionTitleDisplay.innerHTML = imageJSON2[key].title;
-            hardcoverFictionAuthorDisplay.innerHTML = imageJSON2[key].author;
-        } else if (jsonListName == "hardcover-nonfiction") {
-            hardcoverNonfictionTitleDisplay.innerHTML = imageJSON2[key].title;
-            hardcoverNonfictionAuthorDisplay.innerHTML = imageJSON2[key].author;
-        } else if (jsonListName == "combined-print-and-e-book-nonfiction") {
-            printEbookNonfictionTitleDisplay.innerHTML = imageJSON2[key].title;
-            printEbookNonfictionAuthorDisplay.innerHTML = imageJSON2[key].author;
-        } else {
-            console.log("Wasn't able to match books to lists");
-        }
     });
 
     var myElem = document.getElementsByClassName('column-5th')
@@ -73,36 +71,68 @@ function buildBookShelf() {
 
 }
 
+function puttingBooksOnShelf() {
+    console.log("shelving books");
+    let myList = selectedList.value;
 
-function takeBookOffShelf(book) {
-    //Set book to active
     for (let bookCover of bookCovers) {
-        if (book.id != bookCover.listname) {
-            bookCover.active = false;
-        } else {
-            bookCover.active = true;
-            bookCover.imageSetup = true;
-            console.log("clicked: ", bookCover.listname);
-            
-            let displayListName = document.getElementById("bestseller-list-name");
-            displayListName.innerHTML = bookCover.listnameDisplay;
+        if (bookCover.listname == selectedList.value) {
+            if (bookCover.rank === 1) {
+                title1Display.innerHTML = bookCover.title;
+                author1Display.innerHTML = bookCover.author;
+                image1Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+            } else if (bookCover.rank === 2) {
+                title2Display.innerHTML = bookCover.title;
+                author2Display.innerHTML = bookCover.author;
+                image2Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+            } else if (bookCover.rank === 3) {
+                title3Display.innerHTML = bookCover.title;
+                author3Display.innerHTML = bookCover.author;
+                image3Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+            } else if (bookCover.rank === 4) {
+                title4Display.innerHTML = bookCover.title;
+                author4Display.innerHTML = bookCover.author;
+                image4Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+            } else if (bookCover.rank === 5) {
+                title5Display.innerHTML = bookCover.title;
+                author5Display.innerHTML = bookCover.author;
+                image5Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+            } else {
+                console.log("Wasn't able to match books to lists");
+            }
         }
     }
-    //Change book info to reflect active book
-    let bookInfo = book.children[1];
-    let bookTitle = bookInfo.children[0].innerHTML;
-    let bookAuthor = bookInfo.children[1].innerHTML;
 
-    document.getElementById("displayCover").style.display = "block";
-    document.getElementById("active-book-info").style.display = "flex";
-
-    let displayAuthor = document.getElementById("bestseller-author-name");
-    displayAuthor.innerHTML = bookAuthor;
-
-    let displayBookTitle = document.getElementById("bestseller-book-title");
-    displayBookTitle.innerHTML = bookTitle;
+}
 
 
+function takeBookOffShelf(book) {
+    console.log("taking a book off the shelf");
+    let rankFromID = book.id.charAt(book.id.length - 1);
+    for (let bookCover of bookCovers) {
+        if (bookCover.activeList) {
+            if (rankFromID != bookCover.rank) {
+                bookCover.active = false;
+            } else {
+                bookCover.active = true;
+                bookCover.imageSetup = true;
+                console.log(bookCover.title);
+
+                //Change text display
+                document.getElementById("displayCover").style.display = "block";
+                document.getElementById("active-book-info").style.display = "flex";
+
+                let displayListName = document.getElementById("bestseller-list-name");
+                displayListName.innerHTML = bookCover.listnameDisplay;
+
+                let displayAuthor = document.getElementById("bestseller-author-name");
+                displayAuthor.innerHTML = bookCover.author;
+
+                let displayBookTitle = document.getElementById("bestseller-book-title");
+                displayBookTitle.innerHTML = bookCover.title;
+            }
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -119,7 +149,7 @@ function preload() {
 
     stickerImg = loadImage("assets/goldstar.png");
     stickers.push(new Sticker(stickerImg));
-    
+
 }
 
 function setup() {
@@ -136,14 +166,10 @@ function draw() {
 
     for (let bookCover of bookCovers) {
         bookCover.draw();
+        bookCover.update();
     }
 }
 
-//--------------------------------------------------------------
 
 
-function captureBookImage() {
-    let bookImage = get();
-    return bookImage;
-}
 
