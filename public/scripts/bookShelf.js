@@ -1,10 +1,8 @@
+let currentFlow;
+
 //--------------------------------------------------------------
 // BOOKSHELF
 //--------------------------------------------------------------
-let activeBook = false;
-let currentFlow;
-let myNewBook;
-
 let selectedList = document.getElementById("select-list");
 selectedList.addEventListener("change", updateList);
 
@@ -80,23 +78,43 @@ function puttingBooksOnShelf() {
             if (bookCover.rank === 1) {
                 title1Display.innerHTML = bookCover.title;
                 author1Display.innerHTML = bookCover.author;
-                image1Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                if (bookCover.hasBeenEdited) {
+                    bookCover.updateBookshelfImage();
+                } else {
+                    image1Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                }
             } else if (bookCover.rank === 2) {
                 title2Display.innerHTML = bookCover.title;
                 author2Display.innerHTML = bookCover.author;
-                image2Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                if (bookCover.hasBeenEdited) {
+                    bookCover.updateBookshelfImage();
+                } else {
+                    image2Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                }
             } else if (bookCover.rank === 3) {
                 title3Display.innerHTML = bookCover.title;
                 author3Display.innerHTML = bookCover.author;
-                image3Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                if (bookCover.hasBeenEdited) {
+                    bookCover.updateBookshelfImage();
+                } else {
+                    image3Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                }
             } else if (bookCover.rank === 4) {
                 title4Display.innerHTML = bookCover.title;
                 author4Display.innerHTML = bookCover.author;
-                image4Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                if (bookCover.hasBeenEdited) {
+                    bookCover.updateBookshelfImage();
+                } else {
+                    image4Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                }
             } else if (bookCover.rank === 5) {
                 title5Display.innerHTML = bookCover.title;
                 author5Display.innerHTML = bookCover.author;
-                image5Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                if (bookCover.hasBeenEdited) {
+                    bookCover.updateBookshelfImage();
+                } else {
+                    image5Display.src = "./assets/" + bookCover.listname + "/" + bookCover.rank + ".jpg";
+                }
             } else {
                 console.log("Wasn't able to match books to lists");
             }
@@ -107,16 +125,14 @@ function puttingBooksOnShelf() {
 
 
 function takeBookOffShelf(book) {
-    console.log("taking a book off the shelf");
     let rankFromID = book.id.charAt(book.id.length - 1);
     for (let bookCover of bookCovers) {
         if (bookCover.activeList) {
-            if (rankFromID != bookCover.rank) {
-                bookCover.active = false;
-            } else {
-                bookCover.active = true;
-                bookCover.imageSetup = true;
-                console.log(bookCover.title);
+            if (bookCover.active) {
+                bookCover.bookGoesBack();
+            }
+            if (rankFromID == bookCover.rank) {
+                bookCover.setupBook();
 
                 //Change text display
                 document.getElementById("displayCover").style.display = "block";
