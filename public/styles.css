@@ -1,10 +1,10 @@
-body{
+body {
     font-family: franklin-gothic-atf, sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 
-h1{
+h1 {
     font-family: franklin-gothic-atf, sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -14,7 +14,7 @@ h1{
     text-transform: uppercase;
 }
 
-h2{
+h2 {
     font-family: franklin-gothic-atf, sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -22,7 +22,7 @@ h2{
     line-height: 24px;
 }
 
-h3{
+h3 {
     font-family: franklin-gothic-atf, sans-serif;
     font-weight: 600;
     font-style: normal;
@@ -31,14 +31,15 @@ h3{
     text-transform: uppercase;
 }
 
-button{
-    padding: 16px 24px 20px; 
+button {
+    padding: 16px 24px 20px;
 
     background: #567C94;
     border-radius: 3px;
     border-style: none;
 
-    font-family: franklin-gothic-atf, sans-serif;;
+    font-family: franklin-gothic-atf, sans-serif;
+    ;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -49,23 +50,24 @@ button{
     display: none;
 }
 
-button:hover{
+button:hover {
     background-color: #3C5D73;
 }
 
-button:disabled{
+button:disabled {
     background-color: lightgray;
 }
 
-select{
-    padding: 8px 10px 10px; 
-    margin: 10px 0 8px 0;
+select {
+    padding: 4px;
+    margin: 0px 0 0px 0;
 
     background: #567C94;
     border-radius: 3px;
     border-style: none;
 
-    font-family: franklin-gothic-atf, sans-serif;;
+    font-family: franklin-gothic-atf, sans-serif;
+    ;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;
@@ -77,25 +79,24 @@ select{
 
 /* //-------------------------------------------------------------- */
 /* Classes */
-.container{
+.container {
     display: flex;
     justify-content: center;
 }
 
-.row{
+.row {
     display: flex;
     justify-content: space-between;
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: #000000;
-    padding-bottom: 4px;
 }
 
-.center-container{
+.center-container {
     width: 800px;
 }
 
-.body-small{
+.body-small {
     font-family: franklin-gothic-atf, sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -103,7 +104,7 @@ select{
     line-height: 16px;
 }
 
-.body-large{
+.body-large {
     font-family: franklin-gothic-atf, sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -111,7 +112,7 @@ select{
     line-height: 16px;
 }
 
-.body-info{
+.body-info {
     font-family: itc-galliard, serif;
     font-weight: 400;
     font-style: normal;
@@ -119,8 +120,8 @@ select{
     line-height: 16px;
 }
 
-.books-title{
-    height: 64px;
+.books-title {
+    height: 40px;
     display: flex;
     align-items: flex-end;
     border-bottom-style: solid;
@@ -128,48 +129,56 @@ select{
     border-bottom-color: #C4C4C4;
 }
 
-.bookshelf{
+.bookshelf {
     display: flex;
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: #000000;
 }
 
-.column-5th{
+.column-5th {
     flex-direction: column;
     flex: 1 0 10%;
     padding: 16px 16px 0 16px;
     border-right: 0.0625rem solid #e2e2e2;
 }
 
-.column-5th:hover{
+.column-5th:hover {
     background-color: aquamarine;
 }
 
-.column-5th:nth-child(5){
+.column-5th:nth-child(5) {
     border-right: 0;
 }
 
-.column-5th .book-title{
+.column-5th .book-title {
     font-weight: 600;
     font-size: 10px;
 }
 
-.column-5th .body-small{
+.column-5th .body-small {
     font-size: 10px;
 }
 
+.column-5th > img {
+    width: 60px;
+}
 
-.intro-text{
+.dropdown {
     display: flex;
     align-items: center;
 }
 
-.messingWithTheCover{
+.intro-text {
+    display: flex;
+    align-items: center;
+}
+
+.messingWithTheCover {
     display: none;
 }
 
-.book-info{
+.book-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -178,33 +187,46 @@ select{
     border-bottom-color: #C4C4C4;
 }
 
-.author-title{
+.author-title {
     display: flex;
     flex-direction: column;
     padding: 14px 0px 16px 0px;
 }
 
-.author-title *{
+.author-title * {
     margin: 0px;
 }
 
-.button-container, .feelings-container{
+.button-container,
+.feelings-container {
     height: 52px;
     display: flex;
     justify-content: center;
 }
 
-.red-text{
-    color: red; 
+.red-text {
+    color: red;
     text-decoration-line: underline;
     text-decoration-style: wavy;
 }
 
-.myCanvas{
+.myCanvas {
     border-style: dashed;
     border-color: lightgreen;
 }
 
-.hover-overlay{
+.hover-overlay {
     display: none;
+}
+
+.cursor-redpen {
+    cursor: url('/assets/cursors_redpen.png') 0 24, auto;
+}
+
+.cursor-eraser {
+    cursor: url('/assets/cursors_eraser.png') 0 24, auto;
+}
+
+.cursor-smudge {
+    cursor: url('/assets/cursors_smudge.png') 8 8, auto;
 }

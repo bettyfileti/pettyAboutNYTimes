@@ -71,9 +71,13 @@ function buildBookShelf() {
 
 function puttingBooksOnShelf() {
     console.log("shelving books");
-    let myList = selectedList.value;
 
+    let myList = selectedList.value;
     for (let bookCover of bookCovers) {
+        if (bookCover.active){
+            bookCover.updateBookshelfImage();
+            bookCover.bookGoesBack();
+        }
         if (bookCover.listname == selectedList.value) {
             if (bookCover.rank === 1) {
                 title1Display.innerHTML = bookCover.title;
@@ -120,6 +124,8 @@ function puttingBooksOnShelf() {
             }
         }
     }
+    stickers = [];
+    stickers.push(new Sticker(stickerImg));
 
 }
 
@@ -170,8 +176,8 @@ function preload() {
 
 function setup() {
     pixelDensity(2.5);
-    let myCanvas = createCanvas(800, 300); //300
-    myCanvas.parent('data_container');
+    let myCanvas = createCanvas(800, 280); //300
+    myCanvas.parent('data-container');
     background(backgroundColor);
 
     rectMode(CENTER);

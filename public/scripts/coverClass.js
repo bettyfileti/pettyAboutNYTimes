@@ -1,4 +1,3 @@
-
 class CoverClass {
     constructor(img, title, author, listname, listnameDisplay, rank) {
         this.img = img,
@@ -85,10 +84,15 @@ class CoverClass {
         console.log("updating flow");
         flowButton.style.display = "none";
 
+        let canvas = document.getElementById("data-container");
+        canvas.classList.remove("cursor-redpen");
+        canvas.classList.remove("cursor-eraser");
+        canvas.classList.remove("cursor-smudge");
 
         if (this.flowTracker >= flows.length) {
-            console.log("final");
+            // console.log("final");
             this.finished = true;
+
             feelingsDisplay.innerHTML = "Put it back, no one will notice."
             currentFlow = "finalFlow";
 
@@ -99,8 +103,8 @@ class CoverClass {
 
             //update global currentFlow
             currentFlow = flows[this.flowTracker].name;
-            console.log(flows[this.flowTracker].name, this.flowTracker, currentFlow);
-            console.log("//------");
+            // console.log(flows[this.flowTracker].name, this.flowTracker, currentFlow);
+            // console.log("//------");
         }
 
     }
@@ -147,6 +151,8 @@ let buttonsText = [
 
 //--------------------------------------------------------------
 function scribbleOnImage(img, x, y, width, height) {
+    let canvas = document.getElementById("data-container");
+    canvas.classList.add("cursor-redpen");
     if (mouseIsPressed) {
         push();
         stroke("red");
@@ -160,19 +166,43 @@ function scribbleOnImage(img, x, y, width, height) {
 //--------------------------------------------------------------
 //Erase Image Function
 function eraseImage(img, x, y, width, height) {
-
+    let canvas = document.getElementById("data-container");
+    canvas.classList.remove("cursor-redpen");
+    canvas.classList.add("cursor-eraser");
     if (mouseIsPressed) {
         push();
-        stroke(backgroundColor);
-        strokeWeight(20);
+        stroke(255, 255, 255, 255/3);
+        strokeWeight(15);
         line(mouseX, mouseY, pmouseX, pmouseY);
         pop();
+
+        push();
+        stroke(255, 255, 255, 255/3);
+        strokeWeight(14);
+        line(mouseX, mouseY, pmouseX, pmouseY);
+        pop();
+
+        push();
+        stroke(255, 255, 255, 255/2);
+        strokeWeight(13);
+        line(mouseX, mouseY, pmouseX, pmouseY);
+        pop();
+
+        push();
+        stroke(255, 255, 255, 255/2);
+        strokeWeight(12);
+        line(mouseX, mouseY, pmouseX, pmouseY);
+        pop();
+
         flowButton.style.display = "flex";
     }
 }
 
 //--------------------------------------------------------------
 function addStickers(img, x, y, width, height) {
+    let canvas = document.getElementById("data-container");
+    canvas.classList.remove("cursor-eraser");
+
     background(backgroundColor);
     image(img, x, y, width, height);
 
@@ -185,54 +215,12 @@ function addStickers(img, x, y, width, height) {
     }
 }
 
-
 //--------------------------------------------------------------
-let activeCutOut = [];
-let imageCutOut;
-let rectCutOut;
-let imageIsBeingMoved = false;
-
-function cutImage(img, x, y, width, height) {
-    if (!imageIsBeingMoved) {
-        if (activeCutOut.length === 4) {
-            let x = activeCutOut[0];
-            let y = activeCutOut[1];
-            let w = activeCutOut[2] - activeCutOut[0];
-            let h = activeCutOut[3] - activeCutOut[1];
-
-            if (w < 0) {
-                x = x + w;
-                y = y + h;
-                w = w * -1;
-                h = h * -1;
-            }
-            imageCutOut = get(x, y, w, h);
-            imageSlices.push(new imageSlice(imageCutOut, x, y, w, h));
-            console.log(imageSlices)
-            imageIsBeingMoved = true;
-        }
-    }
-    for (let imageSlice of imageSlices) {
-        if (imageSlice.isDraggable) {
-            imageSlice.over();
-            imageSlice.update();
-            imageSlice.show();
-        }
-    }
-}
-
-
-
-//--------------------------------------------------------------
-function pasteCopies(img, x, y, width, height) {
-    console.log("pasting copies");
-}
-
-//--------------------------------------------------------------
-let focusSize = 10;
+let focusSize = 15;
 function smearImage(img, x, y, width, height) {
+    let canvas = document.getElementById("data-container");
+    canvas.classList.add("cursor-smudge");
 
-    fill("white");
     noFill();
     if (mouseIsPressed) {
         let pixelArray = get(mouseX, mouseY, focusSize, focusSize);
@@ -248,8 +236,10 @@ function smearImage(img, x, y, width, height) {
 
 }
 
-
 //--------------------------------------------------------------
+// Mouse Functions
+//--------------------------------------------------------------
+
 function mouseDragged() {
     if (currentFlow === "addStickers") {
         stickers[stickers.length - 1].placeSticker();
