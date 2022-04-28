@@ -93,7 +93,7 @@ class CoverClass {
             // console.log("final");
             this.finished = true;
 
-            feelingsDisplay.innerHTML = "Put it back, no one will notice."
+            feelingsDisplay.innerHTML = "Just walk away slowly. No one will notice."
             currentFlow = "finalFlow";
 
         } else {
