@@ -22,6 +22,12 @@ class CoverClass {
         console.log("setting up book: ", this.title);
         this.active = true;
         background(backgroundColor);
+        if (this.width < 100){
+            this.width = 164.5;
+            this.height = 250;
+            this.x = 317.75;
+            this.y = 12.5;
+        }
         image(this.editedImg, this.x, this.y, this.width, this.height);
         flowButton.style.display = "none";
         this.hasBeenEdited = true;
