@@ -76,7 +76,6 @@ class CoverClass {
         //Reset stickers
         stickers = [];
         stickers.push(new Sticker(stickerImg));
-
     }
 
     updateBookshelfImage(){

@@ -47,9 +47,14 @@ fetch(url, {
 
 function makeArrayOfListNames(data) {
     let allLists = data.num_results;
-    for (let i = 0; i < 5; i++) {
-        listNames.push(data.results[i]);
-    };
+    listNames.push(data.results[0]);  //combined-print-and-e-book-fiction
+    listNames.push(data.results[1]);  //combined-print-and-e-book-nonfiction
+    listNames.push(data.results[11]); //advice-how-to-and-miscellaneous
+    listNames.push(data.results[23]); //picture-books
+    listNames.push(data.results[25]); //young-adult
+    // for (let i = 0; i < 5; i++) {
+    //     listNames.push(data.results[i]);
+    // };
 };
 
 function fetchLists() {
