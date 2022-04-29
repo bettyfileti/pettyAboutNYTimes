@@ -83,6 +83,10 @@ class CoverClass {
         let idToUpdate = "image-" + this.rank;
         let imageToUpdate = document.getElementById(idToUpdate);
         imageToUpdate.src = newImage.toDataURL();
+
+        //This is taking too long, and then the books are reshelved and this was updated afterwards.
+        // console.log("The active list is", selectedList.value);
+        // console.log("This list is ", this.listname);
     }
 
     updateFlow() {

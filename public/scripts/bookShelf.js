@@ -78,6 +78,8 @@ function puttingBooksOnShelf() {
             bookCover.updateBookshelfImage();
             bookCover.bookGoesBack();
         }
+    }
+    for (let bookCover of bookCovers) {
         if (bookCover.listname == selectedList.value) {
             if (bookCover.rank === 1) {
                 title1Display.innerHTML = bookCover.title;
