@@ -95,10 +95,20 @@ class CoverClass {
         canvas.classList.remove("cursor-smudge");
 
         if (this.flowTracker >= flows.length) {
-            // console.log("final");
             this.finished = true;
-
-            feelingsDisplay.innerHTML = "Just walk away slowly. No one will notice."
+            let textList = [
+                "Just walk away slowly. No one will notice.", 
+                "Some people are so petty.", 
+                "No one was going to buy it anyway.", 
+                "I'll just put it in the trash. It Was going there anyway.", 
+                "I'm really more of a movie person, myself.",
+                "I think it's a massive improvement.",
+                "Well, clearly taste is subjective.",
+                "We can all agree that this is better.",
+                "What do they know anyways.",
+                "I don't see what was so great in the first place.",
+                "The author will thank me later."]
+            feelingsDisplay.innerHTML = random(textList);
             currentFlow = "finalFlow";
 
         } else {
@@ -229,10 +239,10 @@ function smearImage(img, x, y, width, height) {
     noFill();
     if (mouseIsPressed) {
         let pixelArray = get(mouseX, mouseY, focusSize, focusSize);
-
-        image(pixelArray, mouseX, mouseY, focusSize * 1.05, focusSize * 1.05);
+        let imageSize = focusSize * 1.05;
+        image(pixelArray, pmouseX, pmouseY, imageSize, imageSize);
         rect(mouseX, mouseY, focusSize, focusSize);
-        focusSize += .25;
+        focusSize += .2;
         flowButton.style.display = "flex";
 
     } else {
