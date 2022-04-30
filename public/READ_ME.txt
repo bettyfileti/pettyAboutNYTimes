@@ -9,3 +9,5 @@ https://stackoverflow.com/questions/71892543/heroku-and-github-items-could-not-b
 
 git push origin main
 git push heroku main
+
+To test on mobile: "old question new answer" response here:  https://stackoverflow.com/questions/3132105/how-do-you-access-a-website-running-on-localhost-from-iphone-browser

@@ -78,11 +78,16 @@ select {
 
 }
 
+canvas {
+    touch-action: none;
+}
+
 /* //-------------------------------------------------------------- */
 /* Classes */
 
 .footer{
-    position: fixed;
+    /* position: fixed; */
+    position: inherit;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -93,8 +98,10 @@ select {
     background-color: white;
 }
 
+
 .small-p{
-    font-size: 8px;
+    font-size: 10px;
+    line-height: 16px;;
     color: slategray;
     text-align: left;
 }
@@ -107,14 +114,12 @@ select {
 .row {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: #000000;
 }
 
-.center-container {
-    width: 800px;
-}
 
 .body-small {
     font-family: franklin-gothic-atf, sans-serif;
@@ -161,6 +166,10 @@ select {
     flex: 1 0 10%;
     padding: 16px 16px 0 16px;
     border-right: 0.0625rem solid #e2e2e2;
+}
+
+.column-5th > img {
+    width = 80px;
 }
 
 .column-5th:hover {
@@ -230,10 +239,6 @@ select {
     text-decoration-style: wavy;
 }
 
-.myCanvas {
-    border-style: dashed;
-    border-color: lightgreen;
-}
 
 .hover-overlay {
     display: none;
@@ -249,4 +254,76 @@ select {
 
 .cursor-smudge {
     cursor: url('/assets/cursors_smudge.png') 8 8, auto;
+}
+
+@media (max-width: 800px) {
+    .center-container {
+        width: 90vw;
+    }
+    
+    .row{
+        padding-bottom: 16px;
+        flex-wrap: wrap;
+    }
+
+    select {
+        min-height: 32px;
+    }
+
+    .bookshelf {
+        width: 90vw;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .column-5th {
+        width: 45vw;
+    }
+
+    .column-5th > img {
+        width: 40vw;
+        max-width: 132px;
+    }
+
+    .book-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .author-title > .body-small {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .book-info {
+        flex-wrap: wrap;
+        padding: 8px;
+    }
+
+    #active-book-info{
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+
+
+    .footer{
+        position: inherit;
+        justify-content: center;
+    }
+
+    .footer > div {
+        width: 90vw;
+    }
+    
+}
+
+@media (min-width: 801px) {
+    .center-container {
+        width: 800px;
+    }
+    .footer > div {
+        width: 800px;
+    }
+
+    
 }
