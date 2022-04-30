@@ -135,6 +135,9 @@ function puttingBooksOnShelf() {
 
 function takeBookOffShelf(book) {
     console.log(book);
+    let footer = document.getElementsByClassName("footer")[0];
+    footer.classList.add("remove-margin-top");
+
     let rankFromID = book.id.charAt(book.id.length - 1);
     for (let bookCover of bookCovers) {
         if (bookCover.activeList) {
