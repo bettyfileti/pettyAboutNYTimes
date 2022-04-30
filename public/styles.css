@@ -233,6 +233,10 @@ canvas {
     justify-content: center;
 }
 
+.button-container {
+    padding-bottom: 16px;
+}
+
 .red-text {
     color: red;
     text-decoration-line: underline;
@@ -254,6 +258,11 @@ canvas {
 
 .cursor-smudge {
     cursor: url('/assets/cursors_smudge.png') 8 8, auto;
+}
+
+#data-container {
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width: 800px) {
@@ -287,6 +296,7 @@ canvas {
 
     .book-title {
         overflow: hidden;
+        white-space:nowrap;
         text-overflow: ellipsis;
     }
 
@@ -313,6 +323,10 @@ canvas {
 
     .footer > div {
         width: 90vw;
+    }
+
+    .button-container {
+        margin: 8px 0 16px 0;
     }
     
 }

@@ -267,6 +267,17 @@ function mouseDragged() {
 
 }
 
+function touchMoved(){
+    // push();
+    // fill(random(255), random(255), random(255));
+    // rect(0, 0, 10, 10);
+    // pop();
+    if (currentFlow === "addStickers") {
+        stickers[stickers.length - 1].placeSticker();
+        stickers.push(new Sticker(stickerImg));
+    }
+}
+
 function mouseClicked() {
     if (currentFlow === "addStickers") {
         stickers[stickers.length - 1].placeSticker();

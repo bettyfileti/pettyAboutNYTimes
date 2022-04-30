@@ -37,6 +37,7 @@ let backgroundColor = [255];
 let stickers = [];
 let bookCovers = [];
 
+
 //--------------------------------------------------------------
 // Setting up Bookshelf
 //--------------------------------------------------------------
@@ -74,7 +75,7 @@ function puttingBooksOnShelf() {
 
     let myList = selectedList.value;
     for (let bookCover of bookCovers) {
-        if (bookCover.active){
+        if (bookCover.active) {
             bookCover.updateBookshelfImage();
             bookCover.bookGoesBack();
         }
@@ -133,6 +134,7 @@ function puttingBooksOnShelf() {
 
 
 function takeBookOffShelf(book) {
+    console.log(book);
     let rankFromID = book.id.charAt(book.id.length - 1);
     for (let bookCover of bookCovers) {
         if (bookCover.activeList) {
@@ -159,6 +161,26 @@ function takeBookOffShelf(book) {
     }
 }
 
+function redrawCanvas(){
+    let currentBook;
+    for (let bookCover of bookCovers){
+        if (bookCover.active){
+            currentBook = bookCover;
+        }
+       
+        bookCover.img.resize(264, 0);
+        bookCover.width = bookCover.img.width;
+        bookCover.height = bookCover.img.height;
+        bookCover.x = (width - bookCover.width)/2;
+
+    }
+    if (currentBook){
+        currentBook = document.getElementById("column-5th-" + currentBook.rank);
+        takeBookOffShelf(currentBook);
+    }
+
+}
+
 //--------------------------------------------------------------
 // p5 Functions
 //--------------------------------------------------------------
@@ -178,7 +200,13 @@ function preload() {
 
 function setup() {
     pixelDensity(2.5);
-    let myCanvas = createCanvas(800, 280); //300
+    let myCanvas;
+    if (windowWidth < 800) {
+        myCanvas = createCanvas(windowWidth * .75, 460);
+        redrawCanvas()
+    } else {
+        myCanvas = createCanvas(800, 280); //300
+    }
     myCanvas.parent('data-container');
     background(backgroundColor);
 
@@ -192,6 +220,14 @@ function draw() {
         bookCover.draw();
         bookCover.update();
     }
+}
+
+function windowResized() {
+    if (windowWidth < 800) {
+        resizeCanvas(windowWidth * .75, 460);
+        redrawCanvas()
+    }
+
 }
 
 
