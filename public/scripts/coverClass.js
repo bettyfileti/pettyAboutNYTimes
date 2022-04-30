@@ -104,14 +104,16 @@ class CoverClass {
                 "Just walk away slowly. No one will notice.", 
                 "Some people are so petty.", 
                 "No one was going to buy it anyway.", 
-                "I'll just put it in the trash. It Was going there anyway.", 
+                "I'll just put it in the trash, where it belongs.", 
                 "I'm really more of a movie person, myself.",
                 "I think it's a massive improvement.",
                 "Well, clearly taste is subjective.",
                 "We can all agree that this is better.",
                 "What do they know anyways.",
-                "I don't see what was so great in the first place.",
-                "The author will thank me later."]
+                "I don't see what the fuss is about.",
+                "The author will thank me later.",
+                "Amazing what a good editor can do.",
+                "Popular isn't always good, you know."]
             feelingsDisplay.innerHTML = random(textList);
             currentFlow = "finalFlow";
 
