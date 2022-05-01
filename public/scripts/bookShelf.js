@@ -37,7 +37,6 @@ let backgroundColor = [255];
 let stickers = [];
 let bookCovers = [];
 
-
 //--------------------------------------------------------------
 // Setting up Bookshelf
 //--------------------------------------------------------------
@@ -164,20 +163,20 @@ function takeBookOffShelf(book) {
     }
 }
 
-function redrawCanvas(){
+function redrawCanvas() {
     let currentBook;
-    for (let bookCover of bookCovers){
-        if (bookCover.active){
+    for (let bookCover of bookCovers) {
+        if (bookCover.active) {
             currentBook = bookCover;
         }
-       
+
         bookCover.img.resize(264, 0);
         bookCover.width = bookCover.img.width;
         bookCover.height = bookCover.img.height;
-        bookCover.x = (width - bookCover.width)/2;
+        bookCover.x = (width - bookCover.width) / 2;
 
     }
-    if (currentBook){
+    if (currentBook) {
         currentBook = document.getElementById("column-5th-" + currentBook.rank);
         takeBookOffShelf(currentBook);
     }
@@ -227,12 +226,68 @@ function draw() {
 
 function windowResized() {
     if (windowWidth < 800) {
-        resizeCanvas(windowWidth * .75, 460);
+        resizeCanvas(windowWidth * .75, 400);
         redrawCanvas()
     }
 
 }
 
+//--------------------------------------------------------------
+// Super spaghetti twitter code that should be re-written.
+
+const settings = {
+    node: "<a href='#'>Tweet</a>", //node defines the element that will be contained in the button that pops up
+    maxLength: 280, //maxLength is the max length allowed for the tweet
+    extra: null, //extra is simply some extra text that you want to include in your tweets
+    via: null, //via defines the handler for twitter, if you want to be tagged whenever a user tweets something from your site
+    popupArgs: 'width=400,height=400,toolbar=0,location=0', //popupArgs is used to define the twitter popup
+}
+
+let url = ''
+let tweetableText = [
+    "Look at me not being petty about this week's bestsellers. @NYTimesBooks. #notpetty",
+    "Once again, @NYTimesBooks has neglected to include me on a list. #notpetty",
+    "Judging books by their cover is my love language. #notpetty @NYTimesBooks",
+    "I'm #notpetty but *real* writers would rather have 1 person *really read* their work then be on a list. @NYTimesBooks",
+    "Would a petty person even look at the @NYTimesBooks best seller list? No. #notpetty",
+    "Personally attacked by @NYTimesBooks snub of my not-yet-finished but definitely started novella. #notpetty",
+    "#notpetty #notpetty #notpetty #notpetty #notpetty @NYTimesBooks",
+    "@NYTimesBooks, Best Feller List > Best Seller List. Every think of that? #notpetty",
+    "A brilliant, unappreciated literary genius walks into a bar and sells no books. #notpetty @NYTimesBooks",
+    "bEsTsElLiNg AuThOr isn't the flex you think it is, @NYTimesBooks",
+    "@NYTimesBooks, all these best SHELLING authors on the best SHELLERS list. #notpetty",
+    "@NYTimesBooks 'DEFINING CULTURE THROUGH LISTS' ... #notpetty tho",
+    "To this week's @NYTimesBooks best sellers, congratulations on your continued (MARKETING) success. #notpetty"
+]
 
 
+const getTweetURL = function (text, extra, via) {
+    let url = 'https://twitter.com/intent/tweet?text='
+    // trim the text to fit in the max allowed 280 characters
+    const viaUrl = `&via=${via}`
+    const maxLength = settings.maxLength > 280 ? 280 : settings.maxLength
+    const maxAllowedLength = maxLength - viaUrl.length
+    let textToTweet = getRandom(text)
+    if (text.length > maxAllowedLength) {
+        textToTweet = text.substring(0, maxAllowedLength - 1)
+    }
+    url += encodeURIComponent(textToTweet)
+    if (extra) url += encodeURIComponent(' ' + extra)
+    if (via) url += viaUrl
+    return url
+}
 
+
+let btnToTweet = document.getElementById("tweet-btn");
+btnToTweet.addEventListener("click", (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    url = getTweetURL(tweetableText, settings.extra, settings.via);
+    window.open(url, '_blank', settings.popupArgs)
+});
+
+
+//--------------------------------------------------------------
+function getRandom(list) {
+    return list[Math.floor((Math.random() * list.length))];
+}

@@ -117,7 +117,15 @@ class CoverClass {
             feelingsDisplay.innerHTML = random(textList);
             currentFlow = "finalFlow";
 
+            let tweetBtn = document.getElementById("tweet-button-container");
+            tweetBtn.classList.remove("notvisible");
+            tweetBtn.classList.add("visible");
+
         } else {
+            let tweetBtn = document.getElementById("tweet-button-container");
+            tweetBtn.classList.remove("visible");
+            tweetBtn.classList.add("notvisible");
+
             //update text
             flowButton.innerHTML = buttonsText[this.flowTracker];
             feelingsDisplay.innerHTML = feelingsText[this.flowTracker];

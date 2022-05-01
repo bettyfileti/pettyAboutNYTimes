@@ -48,7 +48,7 @@ button {
     text-align: center;
     color: #FFFFFF;
 
-    display: none;
+    /* display: none; */
 }
 
 button:hover {
@@ -123,7 +123,6 @@ canvas {
     border-bottom-width: 2px;
     border-bottom-color: #000000;
 }
-
 
 .body-small {
     font-family: franklin-gothic-atf, sans-serif;
@@ -238,7 +237,7 @@ canvas {
 }
 
 .button-container {
-    padding-bottom: 16px;
+    padding: 2px 0 16px 0;
 }
 
 .red-text {
@@ -264,10 +263,42 @@ canvas {
     cursor: url('/assets/cursors_smudge.png') 8 8, auto;
 }
 
+.notvisible{
+    display: none;
+}
+
+.visible {
+    display: flex;
+}
+
+/* -------------------------------------------------------------- */
+
+
 #data-container {
     display: flex;
     justify-content: center;
 }
+
+#tweet-button-container{
+    justify-content: center;
+    border: none;
+    padding: 8px;
+    flex-direction: column;
+    text-align: center;
+}
+
+#tweet-btn {
+    border: 2px solid #1DA1F2;
+    background-color: #035EC9;
+    border-radius: 64px;
+}
+
+#tweet-btn:hover{
+    background-color: #1DA1F2;
+    border: none;
+}
+
+/* -------------------------------------------------------------- */
 
 @media (max-width: 800px) {
     .center-container {
@@ -277,6 +308,7 @@ canvas {
     .row{
         padding-bottom: 16px;
         flex-wrap: wrap;
+        border: none;
     }
 
     select {
@@ -284,9 +316,10 @@ canvas {
     }
 
     .bookshelf {
-        width: 90vw;
+        width: 95vw;
         overflow-x: auto;
         white-space: nowrap;
+        border-top: 2px solid black;
     }
 
     .column-5th {
@@ -313,6 +346,7 @@ canvas {
         flex-wrap: wrap;
         padding: 8px;
     }
+
 
     #active-book-info{
         padding-bottom: 0px;
