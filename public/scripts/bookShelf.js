@@ -295,7 +295,7 @@ popupClose.addEventListener("click", closePopup);
 
 if (window.innerWidth < 400){
     console.log("small window");
-    popup.classList.add("visible");
+    popup.style.display = "inline";
 } else {
     popup.classList.add("notvisible");
 }
