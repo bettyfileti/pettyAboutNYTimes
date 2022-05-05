@@ -160,9 +160,13 @@ flowButton.addEventListener("click", function () {
 
 let flows = [scribbleOnImage, eraseImage, addStickers, smearImage];
 
+let scribbleText = [
+    "It sure would be a shame if someone <span class='red-text'>scribbled </span> all over this beautiful book cover..."
+]
+//COME BACK HERE!
 
 let feelingsText = [
-    "It sure would be a shame if someone <span class='red-text'>scribbled </span> all over your beautiful cover...",
+    getRandom(scribbleText),
     "Clumsy me! Here, let’s try to erase some of that mess.",
     "It looks worse than it is. We can cover it with a sticker or two.",
     //"If you don’t care for the stickers, we can just cut them out.",

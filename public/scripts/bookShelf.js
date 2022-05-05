@@ -286,6 +286,25 @@ btnToTweet.addEventListener("click", (e) => {
     window.open(url, '_blank', settings.popupArgs)
 });
 
+//--------------------------------------------------------------
+// Safari Pop-up Handler
+//--------------------------------------------------------------
+let popup = document.getElementById("popup-container"); 
+let popupClose = document.getElementById("popup-close");
+popupClose.addEventListener("click", closePopup);
+
+if (window.innerWidth < 400){
+    console.log("small window");
+    popup.classList.add("visible");
+} else {
+    popup.classList.add("notvisible");
+}
+
+function closePopup(){
+    console.log("closing");
+    popup.style.display = "none";
+}
+
 
 //--------------------------------------------------------------
 function getRandom(list) {

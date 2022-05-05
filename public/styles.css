@@ -85,7 +85,7 @@ canvas {
 /* //-------------------------------------------------------------- */
 /* Classes */
 
-.footer{
+.footer {
     /* position: fixed; */
     position: inherit;
     left: 0;
@@ -103,9 +103,10 @@ canvas {
     margin-top: 16px;
 }
 
-.small-p{
+.small-p {
     font-size: 10px;
-    line-height: 16px;;
+    line-height: 16px;
+    ;
     color: slategray;
     text-align: left;
 }
@@ -171,8 +172,8 @@ canvas {
     border-right: 0.0625rem solid #e2e2e2;
 }
 
-.column-5th > img {
-    width = 80px;
+.column-5th>img {
+    width=80px;
 }
 
 .column-5th:hover {
@@ -192,7 +193,7 @@ canvas {
     font-size: 10px;
 }
 
-.column-5th > img {
+.column-5th>img {
     width: 60px;
 }
 
@@ -263,13 +264,48 @@ canvas {
     cursor: url('/assets/cursors_smudge.png') 8 8, auto;
 }
 
-.notvisible{
+.notvisible {
     display: none;
 }
 
 .visible {
     display: flex;
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 70%;
+    position: relative;
+}
+
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.popup .close:hover {
+    color: #06D85F;
+}
+
 
 /* -------------------------------------------------------------- */
 
@@ -279,7 +315,7 @@ canvas {
     justify-content: center;
 }
 
-#tweet-button-container{
+#tweet-button-container {
     justify-content: center;
     border: none;
     padding: 8px;
@@ -293,7 +329,7 @@ canvas {
     border-radius: 64px;
 }
 
-#tweet-btn:hover{
+#tweet-btn:hover {
     background-color: #1DA1F2;
     border: none;
 }
@@ -304,8 +340,8 @@ canvas {
     .center-container {
         width: 90vw;
     }
-    
-    .row{
+
+    .row {
         padding-bottom: 16px;
         flex-wrap: wrap;
         border: none;
@@ -326,7 +362,7 @@ canvas {
         width: 40vw;
     }
 
-    .column-5th > img {
+    .column-5th>img {
         width: 30vw;
         max-width: 132px;
     }
@@ -337,7 +373,7 @@ canvas {
         text-overflow: ellipsis;
     }
 
-    .author-title > .body-small {
+    .author-title>.body-small {
         overflow: hidden;
         text-overflow: ellipsis;
     }
@@ -348,13 +384,13 @@ canvas {
     }
 
 
-    #active-book-info{
+    #active-book-info {
         padding-bottom: 0px;
         padding-top: 0px;
     }
 
 
-    .footer{
+    .footer {
         position: inherit;
         justify-content: center;
         margin-top: 30vh;
@@ -365,23 +401,26 @@ canvas {
         margin-top: 0px;
     }
 
-    .footer > div {
+    .footer>div {
         width: 90vw;
     }
 
     .button-container {
         margin: 8px 0 16px 0;
     }
-    
+
 }
 
 @media (min-width: 801px) {
     .center-container {
         width: 800px;
     }
-    .footer > div {
+
+    .footer>div {
         width: 800px;
     }
 
-    
+
 }
+
+/* https://codepen.io/imprakash/pen/GgNMXO?editors=1100 For Popup*/
